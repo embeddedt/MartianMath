@@ -10428,7 +10428,7 @@ var SpineGameObjectWebGLRenderer = function (renderer, src, interpolationPercent
         return;
     }
 
-    renderer.clearPipeline();
+    renderer.pipelines.clear(); //clearPipeline();
 
     var camMatrix = renderer._tempMatrix1;
     var spriteMatrix = renderer._tempMatrix2;
@@ -10505,7 +10505,7 @@ var SpineGameObjectWebGLRenderer = function (renderer, src, interpolationPercent
         debugShader.unbind();
     }
 
-    renderer.rebindPipeline(pipeline);
+    renderer.pipelines.rebind(pipeline);
 };
 
 module.exports = SpineGameObjectWebGLRenderer;

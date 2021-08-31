@@ -92,7 +92,7 @@ export default class MainScene extends Phaser.Scene {
     if(!musicRunning) {
       this.music = this.sound.add('music', {
         loop: true,
-        volume: 0.15
+        volume: this.game.device.os.iOS ? 0.05 : 0.15 /* ugly hack to make iOS sound more obvious */
       });
       this.music.play();
       musicRunning = true;

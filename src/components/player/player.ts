@@ -1,5 +1,5 @@
 import Controls from '../controls/controls'
-import PlayerSpine from './playerSpine'
+//import PlayerSpine from './playerSpine'
 import MainScene from '../../scenes/mainScene'
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
@@ -7,7 +7,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
   private _halt: boolean = false
   private mapSize: MapSize
   notOnLand: boolean = false
-  playerSpine: PlayerSpine
+  //playerSpine: PlayerSpine
   scene: MainScene
 
   isDead(): boolean {
@@ -29,16 +29,19 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     // })
     // this.play('walk')
 
-    this.setVisible(false)
+    this.setVisible(true)
+
+    //let theSkin = level % 2 == 0 ? 'blue' : 'green'
+    //this.setTexture('boy-' + theSkin)
 
     this.setOrigin(0, 1)
     this.setDragX(1500)
     this.body.setSize(70, 132)
     this.body.setOffset(25, 24)
 
-    let theSkin = level % 2 == 0 ? 'blue' : 'green'
-    this.playerSpine = new PlayerSpine(scene, this.body.center.x, this.body.bottom)
-    this.playerSpine.setSkin(theSkin)
+   
+    //this.playerSpine = new PlayerSpine(scene, this.body.center.x, this.body.bottom)
+    //this.playerSpine.setSkin(theSkin)
   }
 
   kill() {
@@ -56,7 +59,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   killEnemy() {
-    this.playerSpine.spine.customParams.isKilling = true
+    //this.playerSpine.spine.customParams.isKilling = true
     this.setVelocityY(-600)
   }
 
@@ -94,8 +97,11 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
       this.notOnLand = true
     }
     
+    if(this.scene.game.device.features.vibration) {
+        window.navigator.vibrate(200);
+    }
 
     // update spine animation
-    this.playerSpine.update(this)
+   // this.playerSpine.update(this)
   }
 }
