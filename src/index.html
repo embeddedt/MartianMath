@@ -164,6 +164,10 @@
       window.onchoosefn = function(ev) {
         window.operation = ev.currentTarget.textContent.toLowerCase();
         window.maxResultSize = document.querySelector("#facts-to-10").checked ? 10 : 5;
+        startGame();
+      }
+
+      function startGame() {
         window.generateMathQuestions(window.operation, window.maxResultSize);
         console.log("Facts to", window.maxResultSize);
         var loadEvent = document.createEvent('Event');
@@ -174,6 +178,26 @@
         var optionScreen = document.querySelector("#option-screen");
         optionScreen.parentNode.removeChild(optionScreen);
       }
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    window.addEventListener("load", function() {
+        var operation = getParameterByName("operation");
+        var factscategory = getParameterByName("factscategory");
+        if(factscategory != null && operation != null) {
+            window.maxResultSize = parseInt(factscategory);
+            window.operation = operation;
+            startGame();
+        }
+    });
 
     </script>
 
